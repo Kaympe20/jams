@@ -40,7 +40,7 @@ slug: 'bakebuild'
 
 ## Importing the image into onshape
 * Now that you have your template, we can start designing!​
-* Click the plus sign next to studio parts (far right bottom corner)​
+* Click the plus sign next to studio parts (far left bottom corner)​
     * A dropdown menu should appear​
     * Click on the last option “import”​
 * Select your chosen file and click “open”​
