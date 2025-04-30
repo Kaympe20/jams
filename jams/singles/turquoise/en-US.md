@@ -4,7 +4,7 @@ description: 'You ship a linux distro, we ship a HC skirt (or pants) and a DVD w
 contributor: 'Kaympe20'
 contributorSlackId: 'U07HY92M9GA'
 thumbnail: 'https://wallpapers.com/images/featured-full/linux-desktop-nf65sk0rdgsvfl3u.jpg'
-timeEstimate: '60 Min'
+timeEstimate: '4-6 hours'
 difficulty: 'Intermediate'
 keywords: 'turquoise, help me, oh dear god, help me please, linux, distro, ysws, you ship we ship'
 presentation: ''
@@ -29,7 +29,6 @@ This guide assumes you know some basic linux terminology. Please use the followi
 * kernel
 * package manager
 * distro
-* flatpak
 * bash
 
 ## Development Environment Setup
@@ -160,4 +159,49 @@ This would give me a complete `rpm-ostree` section of
       # "firefox" is the main package, "firefox-langpacks" is a dependency
       - firefox
       - firefox-langpacks
+```
+
+### `flatpak` ([reference](https://blue-build.org/reference/modules/default-flatpaks/))
+`flatpak`s are containerized applications that run as containers and are completely unified between distros. This means that when you install a flatpak on *Ubuntu*, it will be exactly the same as when install it on *Arch Linux*. This standardization is why **this is the recomended way to preinstall software**.
+
+If you are new to `flatpak`s, it is recomended that you install packages under `system`.
+
+The only things you really need to know to use it are `install` and `remove` which both need the reverse URL notation, also known as the app id. To find this ID, all you need to do is search for the app you want on [flathub](https://flathub.org/) and copy the end of the url.
+
+![](https://hc-cdn.hel1.your-objectstorage.com/s/v3/59c870693131c89cb37d865b8044987615bad981_image.png)
+
+Then simply add it to install or remove in a similar fasion to `rpm-ostree`.
+
+```yaml
+- type: default-flatpaks
+    notify: true # Send notification after install/uninstall is finished (true/false)
+    system:
+      # If no repo information is specified, Flathub will be used by default
+      install:
+        - org.mozilla.firefox
+        - org.gnome.Loupe
+        - com.brave.Browser
+      remove:
+        - org.gnome.eog
+    user: {} # Also add Flathub user repo, but no user packages
+```
+
+### `bling`
+
+`bling` is a install helper for a select few features that you might find useful. It can install any of the following modules:
+* `rpmfusion`
+* `negativo17`
+* `ublue-update`
+* `1password`
+* `dconf-update-service`
+* `gnome-vrr`
+
+This guide won't go into what each of these are, but if you are interested, you can quite easily look it up.
+
+To add any of these modules, simply add it to the `install:` property. An example is shown below using `rpmfusion`, an alternate package repository.
+
+```yaml
+- type: bling
+    install:
+      - rpmfusion
 ```
