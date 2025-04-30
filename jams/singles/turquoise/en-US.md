@@ -202,6 +202,6 @@ To add any of these modules, simply add it to the `install:` property. An exampl
 
 ```yaml
 - type: bling
-    install:
-      - rpmfusion
+  install:
+    - rpmfusion
 ```
